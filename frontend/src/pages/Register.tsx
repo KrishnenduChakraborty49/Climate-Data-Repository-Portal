@@ -6,7 +6,9 @@ import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import axiosInstance from '../api/axiosInstance';
 import { useAuthStore } from '../store/authStore';
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -16,26 +18,20 @@ const Login: React.FC = () => {
     const navigate = useNavigate();
     const login = useAuthStore(state => state.login);
 
-    const handleLogin = async (e: React.FormEvent) => {
+    const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setLoading(true);
 
         try {
-            const response = await axiosInstance.post('/auth/login', { email, password });
+            const response = await axiosInstance.post('/auth/register', { firstName, lastName, email, password });
             if (response.data.success) {
                 const { token, role, email: userEmail } = response.data.data;
                 login(token, { email: userEmail, roles: [role] });
-                
-                // Redirect based on role
-                if (role === 'ROLE_ADMIN') {
-                    navigate('/admin');
-                } else {
-                    navigate('/datasets');
-                }
+                navigate('/datasets');
             }
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Failed to login. Please check your credentials.');
+            setError(err.response?.data?.message || 'Failed to create account. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -45,18 +41,39 @@ const Login: React.FC = () => {
         <Container maxWidth="sm" sx={{ mt: 8 }}>
             <Card sx={{ borderRadius: 4, boxShadow: '0 10px 25px rgba(0,0,0,0.05)', p: 2 }}>
                 <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <Box sx={{ p: 2, borderRadius: '50%', bgcolor: 'primary.main', color: 'white', mb: 2 }}>
+                    <Box sx={{ p: 2, borderRadius: '50%', bgcolor: 'secondary.main', color: 'white', mb: 2 }}>
                         <CloudOutlinedIcon fontSize="large" />
                     </Box>
-                    <Typography variant="h4" sx={{ fontWeight: 800, mb: 1 }}>Welcome Back</Typography>
-                    <Typography color="text.secondary" sx={{ mb: 4 }}>Sign in to access your climate datasets</Typography>
+                    <Typography variant="h4" sx={{ fontWeight: 800, mb: 1 }}>Create Account</Typography>
+                    <Typography color="text.secondary" sx={{ mb: 4 }}>Join the Climate Data Repository</Typography>
 
                     {error && <Alert severity="error" sx={{ width: '100%', mb: 3 }}>{error}</Alert>}
 
-                    <Box component="form" onSubmit={handleLogin} sx={{ width: '100%' }}>
+                    <Box component="form" onSubmit={handleRegister} sx={{ width: '100%' }}>
+                        <Box sx={{ display: 'flex', gap: 2 }}>
+                            <TextField
+                                fullWidth
+                                label="First Name"
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                            />
+                            <TextField
+                                fullWidth
+                                label="Last Name"
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                            />
+                        </Box>
                         <TextField
                             fullWidth
                             label="Email Address"
+                            type="email"
                             variant="outlined"
                             margin="normal"
                             required
@@ -65,7 +82,7 @@ const Login: React.FC = () => {
                         />
                         <TextField
                             fullWidth
-                            label="Password"
+                            label="Password (min 6 characters)"
                             type={showPassword ? 'text' : 'password'}
                             variant="outlined"
                             margin="normal"
@@ -87,19 +104,19 @@ const Login: React.FC = () => {
                             type="submit" 
                             fullWidth 
                             variant="contained" 
-                            color="primary" 
+                            color="secondary" 
                             size="large" 
                             disabled={loading}
                             sx={{ mt: 4, py: 1.5, fontSize: '1.1rem' }}
                         >
-                            {loading ? 'Signing In...' : 'Sign In'}
+                            {loading ? 'Creating Account...' : 'Sign Up'}
                         </Button>
 
                         <Box sx={{ mt: 3, textAlign: 'center' }}>
                             <Typography variant="body2" color="text.secondary">
-                                Don't have an account?{' '}
-                                <Link component={RouterLink} to="/register" color="primary.main" sx={{ fontWeight: 600 }}>
-                                    Sign Up
+                                Already have an account?{' '}
+                                <Link component={RouterLink} to="/login" color="primary.main" sx={{ fontWeight: 600 }}>
+                                    Sign In
                                 </Link>
                             </Typography>
                         </Box>
@@ -110,4 +127,4 @@ const Login: React.FC = () => {
     );
 };
 
-export default Login;
+export default Register;

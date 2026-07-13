@@ -8,8 +8,10 @@ import MainLayout from './components/layout/MainLayout';
 import Home from './pages/Home';
 import Repository from './pages/Repository';
 import DatasetDetails from './pages/DatasetDetails';
-import AdminDashboard from './pages/AdminDashboard';
 import Login from './pages/Login';
+import Register from './pages/Register';
+import AdminDashboard from './pages/AdminDashboard';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,7 @@ function App() {
               <Route path="datasets/:id" element={<DatasetDetails />} />
               <Route path="admin" element={<AdminDashboard />} />
               <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
             </Route>
           </Routes>
         </Router>
