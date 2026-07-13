@@ -40,7 +40,7 @@ const Repository: React.FC = () => {
 
             <Grid container spacing={4}>
                 {/* Sidebar (Filters placeholder) */}
-                <Grid item xs={12} md={3}>
+                <Grid size={{ xs: 12, md: 3 }}>
                     <Card sx={{ p: 2, borderRadius: 3, boxShadow: '0 4px 6px rgba(0,0,0,0.02)' }}>
                         <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>Filters</Typography>
                         {(category || search) ? (
@@ -75,7 +75,7 @@ const Repository: React.FC = () => {
                 </Grid>
 
                 {/* Main Content */}
-                <Grid item xs={12} md={9}>
+                <Grid size={{ xs: 12, md: 9 }}>
                     {datasets.length === 0 ? (
                         <Card sx={{ p: 6, textAlign: 'center', borderRadius: 4, bgcolor: '#f8fafc', border: '1px dashed #cbd5e1', boxShadow: 'none' }}>
                             <StorageOutlinedIcon sx={{ fontSize: 60, color: '#94a3b8', mb: 2 }} />
@@ -85,7 +85,7 @@ const Repository: React.FC = () => {
                     ) : (
                         <Grid container spacing={3}>
                             {datasets.map((dataset: any) => (
-                                <Grid item xs={12} key={dataset.id}>
+                                <Grid size={{ xs: 12 }} key={dataset.id}>
                                     <Card sx={{ borderRadius: 3, boxShadow: '0 4px 12px rgba(0,0,0,0.03)', transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-2px)' } }}>
                                         <CardContent sx={{ p: 3 }}>
                                             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>

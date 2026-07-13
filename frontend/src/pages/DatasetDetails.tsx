@@ -45,7 +45,7 @@ const DatasetDetails: React.FC = () => {
             
             <Grid container spacing={4}>
                 {/* Main Info */}
-                <Grid item xs={12} md={8}>
+                <Grid size={{ xs: 12, md: 8 }}>
                     <Typography variant="h3" sx={{ fontWeight: 800, mb: 2, color: '#0f172a' }}>
                         {dataset.title}
                     </Typography>
@@ -65,15 +65,15 @@ const DatasetDetails: React.FC = () => {
 
                     <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>Metadata</Typography>
                     <Grid container spacing={2}>
-                        <Grid item xs={6}><Typography color="text.secondary">Format:</Typography><Typography fontWeight={600}>{dataset.fileFormat}</Typography></Grid>
-                        <Grid item xs={6}><Typography color="text.secondary">Size:</Typography><Typography fontWeight={600}>{formatBytes(dataset.fileSize)}</Typography></Grid>
-                        <Grid item xs={6}><Typography color="text.secondary">License:</Typography><Typography fontWeight={600}>{dataset.metadata?.license || 'Open Data Commons'}</Typography></Grid>
-                        <Grid item xs={6}><Typography color="text.secondary">Resolution:</Typography><Typography fontWeight={600}>{dataset.metadata?.resolution || 'N/A'}</Typography></Grid>
+                        <Grid size={{ xs: 6 }}><Typography color="text.secondary">Format:</Typography><Typography sx={{ fontWeight: 600 }}>{dataset.fileFormat}</Typography></Grid>
+                        <Grid size={{ xs: 6 }}><Typography color="text.secondary">Size:</Typography><Typography sx={{ fontWeight: 600 }}>{formatBytes(dataset.fileSize)}</Typography></Grid>
+                        <Grid size={{ xs: 6 }}><Typography color="text.secondary">License:</Typography><Typography sx={{ fontWeight: 600 }}>{dataset.metadata?.license || 'Open Data Commons'}</Typography></Grid>
+                        <Grid size={{ xs: 6 }}><Typography color="text.secondary">Resolution:</Typography><Typography sx={{ fontWeight: 600 }}>{dataset.metadata?.resolution || 'N/A'}</Typography></Grid>
                     </Grid>
                 </Grid>
 
                 {/* Sidebar Actions */}
-                <Grid item xs={12} md={4}>
+                <Grid size={{ xs: 12, md: 4 }}>
                     <Card sx={{ borderRadius: 4, boxShadow: '0 10px 25px rgba(0,0,0,0.05)', position: 'sticky', top: 100 }}>
                         <CardContent sx={{ p: 4, textAlign: 'center' }}>
                             <Box sx={{ p: 2, borderRadius: '50%', bgcolor: '#f0fdf4', color: '#16a34a', display: 'inline-flex', mb: 2 }}>

@@ -3,7 +3,7 @@ import { Container, Typography, Grid, Card, CardContent, Box, Button, Table, Tab
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { datasetApi } from '../api/datasetApi';
-import { useAuthStore } from '../store/authStore';
+
 
 const AdminDashboard: React.FC = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -12,7 +12,6 @@ const AdminDashboard: React.FC = () => {
     const [uploadError, setUploadError] = useState('');
 
     const queryClient = useQueryClient();
-    const token = useAuthStore(state => state.token);
 
     // Fetch datasets
     const { data: datasetPage, isLoading } = useQuery({
@@ -61,7 +60,7 @@ const AdminDashboard: React.FC = () => {
         });
     };
 
-    if (isLoading) return <Box p={4}><CircularProgress /></Box>;
+    if (isLoading) return <Box sx={{ p: 4 }}><CircularProgress /></Box>;
 
     const datasets = datasetPage?.content || [];
 
@@ -76,7 +75,7 @@ const AdminDashboard: React.FC = () => {
 
             {/* KPIs */}
             <Grid container spacing={4} sx={{ mb: 6 }}>
-                <Grid item xs={12} sm={6} md={3}>
+                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                     <Card sx={{ borderLeft: '4px solid #3b82f6' }}>
                         <CardContent>
                             <Typography color="text.secondary" gutterBottom>Total Datasets</Typography>
@@ -85,9 +84,9 @@ const AdminDashboard: React.FC = () => {
                     </Card>
                 </Grid>
                 {/* Other KPIs mocked for now */}
-                <Grid item xs={12} sm={6} md={3}><Card sx={{ borderLeft: '4px solid #10b981' }}><CardContent><Typography color="text.secondary" gutterBottom>Total Downloads</Typography><Typography variant="h4" sx={{ fontWeight: 700 }}>0</Typography></CardContent></Card></Grid>
-                <Grid item xs={12} sm={6} md={3}><Card sx={{ borderLeft: '4px solid #f59e0b' }}><CardContent><Typography color="text.secondary" gutterBottom>Storage Used</Typography><Typography variant="h4" sx={{ fontWeight: 700 }}>1.2 GB</Typography></CardContent></Card></Grid>
-                <Grid item xs={12} sm={6} md={3}><Card sx={{ borderLeft: '4px solid #8b5cf6' }}><CardContent><Typography color="text.secondary" gutterBottom>Active Users</Typography><Typography variant="h4" sx={{ fontWeight: 700 }}>1</Typography></CardContent></Card></Grid>
+                <Grid size={{ xs: 12, sm: 6, md: 3 }}><Card sx={{ borderLeft: '4px solid #10b981' }}><CardContent><Typography color="text.secondary" gutterBottom>Total Downloads</Typography><Typography variant="h4" sx={{ fontWeight: 700 }}>0</Typography></CardContent></Card></Grid>
+                <Grid size={{ xs: 12, sm: 6, md: 3 }}><Card sx={{ borderLeft: '4px solid #f59e0b' }}><CardContent><Typography color="text.secondary" gutterBottom>Storage Used</Typography><Typography variant="h4" sx={{ fontWeight: 700 }}>1.2 GB</Typography></CardContent></Card></Grid>
+                <Grid size={{ xs: 12, sm: 6, md: 3 }}><Card sx={{ borderLeft: '4px solid #8b5cf6' }}><CardContent><Typography color="text.secondary" gutterBottom>Active Users</Typography><Typography variant="h4" sx={{ fontWeight: 700 }}>1</Typography></CardContent></Card></Grid>
             </Grid>
 
             <Typography variant="h5" sx={{ mb: 3, fontWeight: 700 }}>Recent Uploads</Typography>

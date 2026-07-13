@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { Box, Container, Typography, Button, Grid, Card, CardContent, InputBase, Paper, Chip } from '@mui/material';
+import { Box, Container, Typography, Button, InputBase, Paper, Chip } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
-import CloudDownloadOutlinedIcon from '@mui/icons-material/CloudDownloadOutlined';
-import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined';
-import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
