@@ -65,8 +65,7 @@ public class AuthController {
                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 
         User user = User.builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
+                .name(request.getFirstName() + " " + request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(userRole)
