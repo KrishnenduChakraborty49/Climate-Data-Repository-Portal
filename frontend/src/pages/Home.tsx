@@ -65,34 +65,6 @@ const Home: React.FC = () => {
                 </Box>
             </Container>
 
-            {/* Stats Section */}
-            <Box sx={{ bgcolor: 'white', py: 10, mt: 10, borderTop: '1px solid #e2e8f0' }}>
-                <Container maxWidth="xl">
-                    <Grid container spacing={4}>
-                        <Grid item xs={12} md={4}>
-                            <Box sx={{ textAlign: 'center' }}>
-                                <PublicOutlinedIcon sx={{ fontSize: 60, color: 'secondary.main', mb: 2 }} />
-                                <Typography variant="h3" sx={{ fontWeight: 800 }}>500+</Typography>
-                                <Typography variant="h6" color="text.secondary">Global Datasets</Typography>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} md={4}>
-                            <Box sx={{ textAlign: 'center' }}>
-                                <CloudDownloadOutlinedIcon sx={{ fontSize: 60, color: 'secondary.main', mb: 2 }} />
-                                <Typography variant="h3" sx={{ fontWeight: 800 }}>2M+</Typography>
-                                <Typography variant="h6" color="text.secondary">Total Downloads</Typography>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} md={4}>
-                            <Box sx={{ textAlign: 'center' }}>
-                                <InsertChartOutlinedIcon sx={{ fontSize: 60, color: 'secondary.main', mb: 2 }} />
-                                <Typography variant="h3" sx={{ fontWeight: 800 }}>50+</Typography>
-                                <Typography variant="h6" color="text.secondary">Categories</Typography>
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </Box>
         </Box>
     );
 };
