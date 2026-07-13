@@ -19,11 +19,19 @@ const DatasetDetails: React.FC = () => {
     const handleDownload = async () => {
         if (!dataset) return;
         try {
-            await datasetApi.downloadDataset(dataset.id, dataset.fileName);
+            await datasetApi.downloadDataset(dataset.id, dataset.originalFilename || 'dataset_download');
         } catch (err) {
             console.error('Download failed', err);
             alert('Failed to download the dataset. Ensure you are logged in.');
         }
+    };
+
+    const formatBytes = (bytes: number) => {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     };
 
     if (isLoading) return <Container sx={{ mt: 10, textAlign: 'center' }}><CircularProgress /></Container>;
@@ -58,7 +66,7 @@ const DatasetDetails: React.FC = () => {
                     <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>Metadata</Typography>
                     <Grid container spacing={2}>
                         <Grid item xs={6}><Typography color="text.secondary">Format:</Typography><Typography fontWeight={600}>{dataset.fileFormat}</Typography></Grid>
-                        <Grid item xs={6}><Typography color="text.secondary">Size:</Typography><Typography fontWeight={600}>{(dataset.fileSize / 1024 / 1024).toFixed(2)} MB</Typography></Grid>
+                        <Grid item xs={6}><Typography color="text.secondary">Size:</Typography><Typography fontWeight={600}>{formatBytes(dataset.fileSize)}</Typography></Grid>
                         <Grid item xs={6}><Typography color="text.secondary">License:</Typography><Typography fontWeight={600}>{dataset.metadata?.license || 'Open Data Commons'}</Typography></Grid>
                         <Grid item xs={6}><Typography color="text.secondary">Resolution:</Typography><Typography fontWeight={600}>{dataset.metadata?.resolution || 'N/A'}</Typography></Grid>
                     </Grid>
@@ -73,7 +81,7 @@ const DatasetDetails: React.FC = () => {
                             </Box>
                             <Typography variant="h5" sx={{ fontWeight: 700, mb: 1 }}>Download Dataset</Typography>
                             <Typography color="text.secondary" variant="body2" sx={{ mb: 4 }}>
-                                {(dataset.fileSize / 1024 / 1024).toFixed(2)} MB • {dataset.fileFormat}
+                                {formatBytes(dataset.fileSize)} • {dataset.fileFormat}
                             </Typography>
                             <Button 
                                 variant="contained" 

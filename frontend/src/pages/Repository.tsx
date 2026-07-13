@@ -18,6 +18,14 @@ const Repository: React.FC = () => {
 
     const datasets = datasetPage?.content || [];
 
+    const formatBytes = (bytes: number) => {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    };
+
     return (
         <Container maxWidth="xl" sx={{ mt: 6, mb: 6 }}>
             <Box sx={{ mb: 6 }}>
@@ -65,7 +73,7 @@ const Repository: React.FC = () => {
                                             </Box>
                                             <Box sx={{ display: 'flex', gap: 1, mt: 2, flexWrap: 'wrap' }}>
                                                 <Chip label={dataset.category?.name || 'Uncategorized'} size="small" sx={{ bgcolor: '#e0f2fe', color: '#0369a1', fontWeight: 600 }} />
-                                                <Chip label={`${(dataset.fileSize / 1024 / 1024).toFixed(2)} MB`} size="small" variant="outlined" />
+                                                <Chip label={formatBytes(dataset.fileSize)} size="small" variant="outlined" />
                                                 <Chip label={dataset.fileFormat} size="small" variant="outlined" />
                                             </Box>
                                         </CardContent>
