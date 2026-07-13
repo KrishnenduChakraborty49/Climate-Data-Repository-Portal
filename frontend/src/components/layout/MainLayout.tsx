@@ -31,9 +31,7 @@ const MainLayout: React.FC = () => {
                             
                             {isAuthenticated ? (
                                 <>
-                                    {user?.roles?.includes('ROLE_ADMIN') && (
-                                        <Button component={Link} to="/admin" color="primary" variant="outlined">Admin Dashboard</Button>
-                                    )}
+                                    <Button component={Link} to="/admin" color="primary" variant="outlined">Dashboard</Button>
                                     <Button onClick={handleLogout} color="error" sx={{ fontWeight: 600 }}>Logout</Button>
                                 </>
                             ) : (

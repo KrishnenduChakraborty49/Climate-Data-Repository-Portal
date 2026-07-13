@@ -41,7 +41,7 @@ public class DatasetController {
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<ApiResponse<DatasetResponse>> uploadDataset(
             @RequestPart("dataset") @Valid DatasetRequest request,
             @RequestPart("file") MultipartFile file,

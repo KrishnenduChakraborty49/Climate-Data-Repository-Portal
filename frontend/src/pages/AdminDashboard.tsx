@@ -67,7 +67,7 @@ const AdminDashboard: React.FC = () => {
     return (
         <Container maxWidth="xl" sx={{ mt: 4 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-                <Typography variant="h3" sx={{ fontWeight: 800 }}>Admin Dashboard</Typography>
+                <Typography variant="h3" sx={{ fontWeight: 800 }}>Dashboard</Typography>
                 <Button variant="contained" color="secondary" startIcon={<FileUploadOutlinedIcon />} onClick={() => setOpenModal(true)}>
                     Upload Dataset
                 </Button>
