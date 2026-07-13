@@ -5,8 +5,10 @@ export const datasetApi = {
         const res = await axiosInstance.get('/categories');
         return res.data.data;
     },
-    getAllDatasets: async (page = 0, size = 20) => {
-        const res = await axiosInstance.get(`/datasets?page=${page}&size=${size}`);
+    getAllDatasets: async (page = 0, size = 20, category?: string) => {
+        let url = `/datasets?page=${page}&size=${size}`;
+        if (category) url += `&category=${encodeURIComponent(category)}`;
+        const res = await axiosInstance.get(url);
         return res.data.data;
     },
     getDatasetById: async (id: string) => {

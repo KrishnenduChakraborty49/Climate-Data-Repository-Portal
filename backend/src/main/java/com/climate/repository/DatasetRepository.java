@@ -12,5 +12,6 @@ import java.util.UUID;
 @Repository
 public interface DatasetRepository extends JpaRepository<Dataset, UUID>, JpaSpecificationExecutor<Dataset> {
     Page<Dataset> findByIsPublicTrue(Pageable pageable);
+    Page<Dataset> findByCategoryNameIgnoreCase(String categoryName, Pageable pageable);
     boolean existsByStoredFilename(String storedFilename);
 }
