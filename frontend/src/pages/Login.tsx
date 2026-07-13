@@ -7,8 +7,8 @@ import axiosInstance from '../api/axiosInstance';
 import { useAuthStore } from '../store/authStore';
 
 const Login: React.FC = () => {
-    const [email, setEmail] = useState('admin@climate.org');
-    const [password, setPassword] = useState('password');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
