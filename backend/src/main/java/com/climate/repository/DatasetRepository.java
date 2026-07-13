@@ -13,8 +13,8 @@ import java.util.UUID;
 public interface DatasetRepository extends JpaRepository<Dataset, UUID>, JpaSpecificationExecutor<Dataset> {
     Page<Dataset> findByIsPublicTrue(Pageable pageable);
     @org.springframework.data.jpa.repository.Query("SELECT d FROM Dataset d WHERE " +
-           "(:category IS NULL OR LOWER(d.category.name) = LOWER(:category)) AND " +
-           "(:search IS NULL OR LOWER(d.title) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(d.description) LIKE LOWER(CONCAT('%', :search, '%')))")
+           "(:category = '' OR LOWER(d.category.name) = LOWER(:category)) AND " +
+           "(:search = '' OR LOWER(d.title) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(d.description) LIKE LOWER(CONCAT('%', :search, '%')))")
     Page<Dataset> searchDatasets(@org.springframework.data.repository.query.Param("category") String category, @org.springframework.data.repository.query.Param("search") String search, Pageable pageable);
 
     boolean existsByStoredFilename(String storedFilename);

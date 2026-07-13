@@ -35,8 +35,8 @@ public class DatasetService {
 
     @Transactional(readOnly = true)
     public Page<DatasetResponse> getAllDatasets(String categoryName, String search, Pageable pageable) {
-        String cat = (categoryName != null && !categoryName.trim().isEmpty()) ? categoryName.trim() : null;
-        String term = (search != null && !search.trim().isEmpty()) ? search.trim() : null;
+        String cat = (categoryName != null && !categoryName.trim().isEmpty()) ? categoryName.trim() : "";
+        String term = (search != null && !search.trim().isEmpty()) ? search.trim() : "";
         return datasetRepository.searchDatasets(cat, term, pageable).map(this::mapToResponseWithMetadata);
     }
 
