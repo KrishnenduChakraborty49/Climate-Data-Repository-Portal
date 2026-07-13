@@ -5,7 +5,7 @@ import { useAuthStore } from '../../store/authStore';
 import CloudOutlinedIcon from '@mui/icons-material/CloudOutlined';
 
 const MainLayout: React.FC = () => {
-    const { isAuthenticated, logout, user } = useAuthStore();
+    const { isAuthenticated, logout } = useAuthStore();
     const navigate = useNavigate();
 
     const handleLogout = () => {
