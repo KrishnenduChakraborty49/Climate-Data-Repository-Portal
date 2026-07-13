@@ -34,12 +34,10 @@ public class DatasetService {
     private final StorageService storageService;
 
     @Transactional(readOnly = true)
-    public Page<DatasetResponse> getAllDatasets(String categoryName, Pageable pageable) {
-        if (categoryName != null && !categoryName.trim().isEmpty()) {
-            return datasetRepository.findByCategoryNameIgnoreCase(categoryName, pageable)
-                    .map(this::mapToResponseWithMetadata);
-        }
-        return datasetRepository.findAll(pageable).map(this::mapToResponseWithMetadata);
+    public Page<DatasetResponse> getAllDatasets(String categoryName, String search, Pageable pageable) {
+        String cat = (categoryName != null && !categoryName.trim().isEmpty()) ? categoryName.trim() : null;
+        String term = (search != null && !search.trim().isEmpty()) ? search.trim() : null;
+        return datasetRepository.searchDatasets(cat, term, pageable).map(this::mapToResponseWithMetadata);
     }
 
     @Transactional(readOnly = true)

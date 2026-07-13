@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Container, Typography, Button, Grid, Card, CardContent, InputBase, Paper, Chip } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
@@ -8,6 +8,15 @@ import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleSearch = () => {
+        if (searchTerm.trim()) {
+            navigate(`/datasets?search=${encodeURIComponent(searchTerm.trim())}`);
+        } else {
+            navigate('/datasets');
+        }
+    };
 
     const categories = ['Rainfall', 'Temperature', 'Humidity', 'Wind', 'Hydrology'];
 
@@ -35,14 +44,17 @@ const Home: React.FC = () => {
                         </Box>
                         <InputBase
                             sx={{ ml: 1, flex: 1, py: 1.5 }}
-                            placeholder="Search datasets, categories, or keywords..."
+                            placeholder="Search datasets by title or description..."
                             inputProps={{ 'aria-label': 'search climate datasets' }}
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                         />
                         <Button 
                             variant="contained" 
                             color="secondary" 
                             sx={{ borderRadius: '50px', px: 4, py: 1.5, mr: 0.5 }}
-                            onClick={() => navigate('/datasets')}
+                            onClick={handleSearch}
                         >
                             Search
                         </Button>

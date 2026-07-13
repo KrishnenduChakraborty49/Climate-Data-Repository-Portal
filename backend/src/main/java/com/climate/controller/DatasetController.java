@@ -30,8 +30,9 @@ public class DatasetController {
     @GetMapping
     public ResponseEntity<ApiResponse<Page<DatasetResponse>>> getAllDatasets(
             @RequestParam(required = false) String category,
+            @RequestParam(required = false) String search,
             Pageable pageable) {
-        return ResponseEntity.ok(ApiResponse.success("Datasets retrieved successfully", datasetService.getAllDatasets(category, pageable)));
+        return ResponseEntity.ok(ApiResponse.success("Datasets retrieved successfully", datasetService.getAllDatasets(category, search, pageable)));
     }
 
     @GetMapping("/{id}")

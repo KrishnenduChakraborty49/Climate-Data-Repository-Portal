@@ -5,9 +5,10 @@ export const datasetApi = {
         const res = await axiosInstance.get('/categories');
         return res.data.data;
     },
-    getAllDatasets: async (page = 0, size = 20, category?: string) => {
+    getAllDatasets: async (page = 0, size = 20, category?: string, search?: string) => {
         let url = `/datasets?page=${page}&size=${size}`;
         if (category) url += `&category=${encodeURIComponent(category)}`;
+        if (search) url += `&search=${encodeURIComponent(search)}`;
         const res = await axiosInstance.get(url);
         return res.data.data;
     },
