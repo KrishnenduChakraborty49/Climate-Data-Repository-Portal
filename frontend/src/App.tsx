@@ -11,7 +11,6 @@ import DatasetDetails from './pages/DatasetDetails';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AdminDashboard from './pages/AdminDashboard';
-import ProtectedRoute from './components/ProtectedRoute';
 
 const queryClient = new QueryClient();
 
